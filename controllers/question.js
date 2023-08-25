@@ -55,8 +55,10 @@ const deleteQuestion = async (req, res) => {
   res.json(deletedQuestion);
 };
 
-const getQuestion = (req, res) => {
-  res.send("get question");
+const getQuestion = async (req, res) => {
+  const {id}=req.params;
+  const question= await Question.findById(id).populate('options').exec();
+  res.json(question);
 };
 
 module.exports = {
